@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.util.logging.Level;
 
 import com.paypal.selion.logging.SeLionGridLogger;
@@ -119,7 +120,7 @@ public class FileBackedStringBuffer {
 
         if (file == null) {
             try {
-                file = File.createTempFile("testng", "FileBackedStringBuffer");
+                file = Files.createTempFile("testng", "FileBackedStringBuffer").toFile();
                 file.deleteOnExit();
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, e.getMessage(), e);

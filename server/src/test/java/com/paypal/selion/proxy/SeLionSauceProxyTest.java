@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Files;
 
 import static org.testng.Assert.assertTrue;
 
@@ -64,7 +65,7 @@ public class SeLionSauceProxyTest {
     @Test
     public void testSauceProxyConfig() throws Exception {
         InputStream stream = this.getClass().getResourceAsStream(SeLionGridConstants.NODE_SAUCE_CONFIG_FILE_RESOURCE);
-        tempFile = File.createTempFile("selion-test", null);
+        tempFile = Files.createTempFile("selion-test", null).toFile();
         FileUtils.copyInputStreamToFile(stream, tempFile);
         req = new RegistrationRequest(GridNodeConfiguration.loadFromJSON(tempFile.toString()));
         assertTrue(req.getConfiguration().capabilities.size() > 0);

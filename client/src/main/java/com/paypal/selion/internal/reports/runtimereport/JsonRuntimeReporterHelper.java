@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,9 +86,9 @@ public class JsonRuntimeReporterHelper {
             File workingDir = new File(Config.getConfigProperty(ConfigProperty.WORK_DIR));
             boolean isCreated = workingDir.mkdirs();
             logger.log(Level.FINER, "Working directory created successfully: " + isCreated);
-            jsonCompletedTest = File.createTempFile("selion-rrct", null, workingDir);
+            jsonCompletedTest = Files.createTempFile(workingDir.toPath(), "selion-rrct", null).toFile();
             jsonCompletedTest.deleteOnExit();
-            jsonCompletedConfig = File.createTempFile("selion-rrcf", null, workingDir);
+            jsonCompletedConfig = Files.createTempFile(workingDir.toPath(), "selion-rrcf", null).toFile();
             jsonCompletedConfig.deleteOnExit();
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
